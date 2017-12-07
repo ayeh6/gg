@@ -15,7 +15,6 @@ struct graph
 	struct edge* edges;
 };
 
-
 void print(int cost[], bool cycle, int numverts)
 {
 	if (cycle == true)
