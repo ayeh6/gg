@@ -22,58 +22,60 @@ void print(int cost[], bool cycle, int numverts)
 	{
 		cout << "FALSE" << endl;
 	}
-        else if (cycle == false)
+	else if (cycle == false)
 	{
 		cout << "TRUE" << endl;
-                for (int i = 0; i < numverts; i++)
-                {
-                        if (cost[i] == INT_MAX)
-                        {
-                                cout << "INFINITY" << endl;
-                        }
-                        else
-                        {
-                                cout << cost[i] << endl;
-                        }
-                }
-        }
+		for (int i = 0; i < numverts; i++)
+		{
+			if (cost[i] == INT_MAX)
+			{
+				cout << "INFINITY" << endl;
+			}
+			else
+			{
+				cout << cost[i] << endl;
+			}
+		}
+	}
 }
 
 bool BellmanFord(graph* G, int numverts, int numedges, int cost[])
 {
 	bool cycle = false;
-        for (int i = 0; i < numverts; i++)
-        {
-                if (i == 0)
-                {
-                        cost[i] = 0;
-                }
-                else
-                {
-                        cost[i] = INT_MAX;
-                }
-        }
+
+	for (int i = 0; i < numverts; i++)
+	{
+		if (i == 0)
+		{
+			cost[i] = 0;
+		}
+		else
+		{
+			cost[i] = INT_MAX;
+		}
+	}
 
 	for (int i = 1; i <= numverts-1; i++)
 	{
-	        for (int j = 0; j < numedges; j++)
-	        {
-	                if (cost[G->edges[j].v1] != INT_MAX && (cost[G->edges[j].v1] + G->edges[j].wgt < cost[G->edges[j].v2]))
-	                {
-	                        cost[G->edges[j].v2] = cost[G->edges[j].v1] + G->edges[j].wgt;
-	                }
-	        }
+		for (int j = 0; j < numedges; j++)
+		{
+			if (cost[G->edges[j].v1] != INT_MAX && (cost[G->edges[j].v1] + G->edges[j].wgt < cost[G->edges[j].v2]))
+			{
+				cost[G->edges[j].v2] = cost[G->edges[j].v1] + G->edges[j].wgt;
+			}
+		}
 	}
 
 	for (int i = 0; i < numedges; i++)
 	{
-	        if (cost[G->edges[i].v1] != INT_MAX && (cost[G->edges[i].v1] + G->edges[i].wgt < cost[G->edges[i].v2]))
-	        {
-	                cycle = true;
-	        }
+		if (cost[G->edges[i].v1] != INT_MAX && (cost[G->edges[i].v1] + G->edges[i].wgt < cost[G->edges[i].v2]))
+		{
+			cycle = true;
+		}
 	}
 
 	print(cost,cycle,numverts);
+
 }
 
 int main()
@@ -104,4 +106,6 @@ int main()
 	}
 
 	BellmanFord(G, numverts, numedges, cost);
+
+	return 0;
 }
