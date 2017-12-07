@@ -42,6 +42,7 @@ bool BellmanFord(graph* G, int numverts, int numedges, int cost[])
 {
 	bool cycle = false;
 
+	//initialize cost array
 	for (int i = 0; i < numverts; i++)
 	{
 		if (i == 0)
@@ -73,6 +74,7 @@ bool BellmanFord(graph* G, int numverts, int numedges, int cost[])
 		}
 	}
 
+	//print output
 	print(cost,cycle,numverts);
 
 }
@@ -82,28 +84,25 @@ int main()
 	int numverts;
 	int numedges;
 
+	//input number of vertices and edges
 	cin >> numverts;
 	cin >> numedges;
 
-	int v1;
-	int v2;
-	int wgt;
 	int cost[numverts];
 
 	struct graph* G = new graph;
 	edge* edges = new edge[numedges];
 	G->edges = edges;
 
+	//inputs for each edge
 	for (int i = 0; i < numedges; i++)
 	{
-		cin >> v1;
-		cin >> v2;
-		cin >> wgt;
-		G->edges[i].v1 = v1;
-		G->edges[i].v2 = v2;
-		G->edges[i].wgt = wgt;
+		cin >> G->edges[i].v1;
+		cin >> G->edges[i].v2;
+		cin >> G->edges[i].wgt;
 	}
 
+	//apply algorithm
 	BellmanFord(G, numverts, numedges, cost);
 
 	return 0;
